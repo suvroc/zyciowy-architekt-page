@@ -18,6 +18,7 @@ import {
     Accordion
 } from 'semantic-ui-react'
 import EpisodeBox from './EpisodeBox';
+import FeedReader from './services/feedReader';
 
 // Heads up!
 // We using React Static to prerender our docs with server side rendering, this is a quite simple solution.
@@ -229,27 +230,31 @@ ResponsiveContainer.propTypes = {
     children: PropTypes.node,
 }
 
-const HomepageLayout = () => (
+class HomepageLayout extends React.Component {
 
-    <ResponsiveContainer>
-
-        <EpisodeBox title="8. Dieta niskoinformacyjna"
-        description="O tym dlaczego warto filtrować informacje, które do nas docierają i jak to wygląda w moim przypadku."
-        snippet='https://anchor.fm/zyciowy-architekt/embed/episodes/8--Dieta-niskoinformacyjna-e50jrh'></EpisodeBox>
-
-<EpisodeBox title="8. Dieta niskoinformacyjna"
-        description="O tym dlaczego warto filtrować informacje, które do nas docierają i jak to wygląda w moim przypadku."
-        snippet='https://anchor.fm/zyciowy-architekt/embed/episodes/8--Dieta-niskoinformacyjna-e50jrh'></EpisodeBox>
-
-<EpisodeBox title="8. Dieta niskoinformacyjna"
-        description="O tym dlaczego warto filtrować informacje, które do nas docierają i jak to wygląda w moim przypadku."
-        snippet='https://anchor.fm/zyciowy-architekt/embed/episodes/8--Dieta-niskoinformacyjna-e50jrh'></EpisodeBox>
-
-<EpisodeBox title="8. Dieta niskoinformacyjna"
-        description="O tym dlaczego warto filtrować informacje, które do nas docierają i jak to wygląda w moim przypadku."
-        snippet='https://anchor.fm/zyciowy-architekt/embed/episodes/8--Dieta-niskoinformacyjna-e50jrh'></EpisodeBox>
+    episodes = [];
+    constructor() {
+        super();
+        this.state = {
+            episodes: []
+        };
+        new FeedReader().readFeed().then(result => {
+            this.setState({
+                episodes: result
+            })
+        });
+    }
 
 
+    
+render() {
+    
+    console.log(this.episodes);
+    return <ResponsiveContainer>
+        {this.state.episodes.map((episode, i) => 
+         <EpisodeBox title={episode.title}
+         description={episode.description}
+         snippet='https://anchor.fm/zyciowy-architekt/embed/episodes/8--Dieta-niskoinformacyjna-e50jrh'></EpisodeBox>)}
 
         <Segment inverted vertical style={{ padding: '5em 0em' }}>
             <Container>
@@ -286,6 +291,7 @@ const HomepageLayout = () => (
             </Container>
         </Segment>
     </ResponsiveContainer>
-)
+}
+}
 
 export default HomepageLayout

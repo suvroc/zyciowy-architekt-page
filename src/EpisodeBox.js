@@ -49,8 +49,8 @@ handleAccordionClick = () => {
           <Header as="h3" style={{ fontSize: "2em" }}>
            {this.title}
           </Header>
-          <p style={{ fontSize: "1.33em" }}>
-            {this.description}
+          <p style={{ fontSize: "1.33em" }} 
+            dangerouslySetInnerHTML={{__html: this.description}}>
           </p>
 
           <Accordion>
