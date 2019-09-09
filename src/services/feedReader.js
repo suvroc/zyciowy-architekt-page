@@ -32,26 +32,13 @@ class FeedReader {
                 link: value.querySelector("link").textContent,
                 guid: value.querySelector("guid").textContent,
                 pubDate: value.querySelector("pubDate").textContent,
-                enclosure : value.querySelector("enclosure").textContent
+                enclosure : value.querySelector("enclosure").textContent,
+                embedLink: value.querySelector("link").textContent.replace("/episodes", "/embed/episodes")
             });
         } );
 
         return result;
     }
-}
-
-class EpisodeModel {
-    title = ''
-    description = ''
-    link = ''
-    creator = ''
-    pubDate = ''
-    enclosure = ''
-    duration = ''
-    image = ''
-    season = ''
-    episode = ''
-
 }
 
 export default FeedReader;

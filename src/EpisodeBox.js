@@ -31,7 +31,7 @@ class EpisodeBox extends React.Component {
       detailsOpened: false,
       title: props.episode.title,
       description: props.episode.description,
-      snippet: "https://anchor.fm/zyciowy-architekt/embed/episodes/8--Dieta-niskoinformacyjna-e50jrh",
+      embedLink: props.episode.embedLink,
       reference: props.episode.reference,
       guid: props.episode.guid
     };
@@ -45,7 +45,9 @@ class EpisodeBox extends React.Component {
   }
 
   render() {
-    const { detailsOpened, title, description, snippet, reference, guid } = this.state;
+    const { detailsOpened, title, description, 
+      snippet, reference, guid,
+      embedLink } = this.state;
     console.log(this.aaa);
     return (
 
@@ -68,7 +70,7 @@ class EpisodeBox extends React.Component {
           </Accordion.Title>
         </Accordion>
         {/* </Container> */}
-        {detailsOpened && <iframe title="iFrameName" src={snippet} width="100%" frameBorder="0" scrolling="no"></iframe>}
+        {detailsOpened && <iframe title="iFrameName" src={embedLink} width="100%" frameBorder="0" scrolling="no"></iframe>}
       </Segment>
     );
   }

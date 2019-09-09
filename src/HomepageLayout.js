@@ -109,6 +109,7 @@ class DesktopContainer extends Component {
         this.setState({ value: result.title });
         document.getElementById(result.guid).scrollIntoView({ 
             behavior: "smooth",
+            block: "start"
          });
         
     }
