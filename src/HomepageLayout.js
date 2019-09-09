@@ -83,14 +83,59 @@ HomepageHeading.propTypes = {
  * It can be more complicated, but you can create really flexible markup.
  */
 class DesktopContainer extends Component {
-    state = {}
+    initialState = { isLoading: false, results: [], value: ''}
+    
+    state = this.initialState;
+
+    constructor() {
+        super();
+        // this.state = {
+        //     episodes: []
+        // };
+        new FeedReader().readFeed().then(result => {
+            this.setState({
+                episodes: result
+            });
+            console.log('1');
+        });
+    }
+
+    
 
     hideFixedMenu = () => this.setState({ fixed: false })
     showFixedMenu = () => this.setState({ fixed: true })
 
+    handleResultSelect = (e, { result }) => { 
+        this.setState({ value: result.title });
+        document.getElementById(result.guid).scrollIntoView({ 
+            behavior: "smooth",
+         });
+        
+    }
+
+    handleSearchChange = (e, { value }) => {
+        
+        this.setState({ isLoading: true, value })
+    
+        setTimeout(() => {
+          if (this.state.value.length < 1) return this.setState(this.initialState)
+    
+          const re = new RegExp(this.state.value, 'i')
+          const isMatch = (result) => re.test(result.title)
+    
+          this.setState({
+            isLoading: false,
+            results: this.state.episodes.filter(isMatch),
+            episodes: this.state.episodes
+          })
+        }, 300)
+      }
+
+      resultRenderer = ({ title }) => <div className="title">{title}</div>
+
     render() {
         const { children } = this.props
-        const { fixed } = this.state
+        const { isLoading, value, results } = this.state
 
         return (
             <Responsive getWidth={getWidth} minWidth={Responsive.onlyTablet.minWidth}>
@@ -104,7 +149,9 @@ class DesktopContainer extends Component {
                         textAlign='center'
                         style={{
                             minHeight: 700, padding: '0em 0em',
-                            backgroundImage: `url(${"img/tree-headline.jpg"})`,
+                            //backgroundImage: `url(${"img/tree-headline.jpg"})`,
+                            background: `linear-gradient(rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0.3)),url("img/tree-headline.jpg")`,
+                            
                             backgroundSize: 'cover'
                         }}
                         vertical
@@ -115,7 +162,7 @@ class DesktopContainer extends Component {
                             // pointing={!fixed}
                             // secondary={!fixed}
                             size='large'
-                            style={{ borderWidth: 0, backgroundColor: '#FFFFFF55' }}
+                            style={{ borderWidth: 0, backgroundColor: '#FFFFFF88' }}
                         >
                             {/* <Container> */}
                             <Menu.Item as='a' active>
@@ -128,10 +175,15 @@ class DesktopContainer extends Component {
 
 
                                 <Search
-
+                                    loading={isLoading}
+                                    onResultSelect={this.handleResultSelect}
+                                    onSearchChange={this.handleSearchChange}
+                                    results={results}
+                                    value={value}
+                                    resultRenderer={this.resultRenderer}
+                                    {...this.props}
                                 />
                                 <Button icon='world' />
-
 
                             </Menu.Item>
                             {/* </Container> */}
@@ -191,7 +243,8 @@ class MobileContainer extends Component {
                         textAlign='center'
                         style={{
                             minHeight: 350, padding: '1em 0em',
-                            backgroundImage: `url(${"img/tree-headline.jpg"})`,
+                            //backgroundImage: `url(${"img/tree-headline.jpg"})`,
+                            background: 'linear-gradient(           rgba(0, 0, 0, 0.3),            rgba(0, 0, 0, 0.3)         ),url("img/tree-headline.jpg");background-size: cover',
                             backgroundSize: 'cover'
                         }}
                         vertical
@@ -256,13 +309,11 @@ class HomepageLayout extends React.Component {
 
 
     render() {
-
-        console.log(this.episodes);
         return <ResponsiveContainer>
             {this.state.episodes.map((episode, i) =>
-                <EpisodeBox title={episode.title}
-                    description={episode.description}
-                    snippet='https://anchor.fm/zyciowy-architekt/embed/episodes/8--Dieta-niskoinformacyjna-e50jrh'></EpisodeBox>)}
+                <EpisodeBox episode={episode}
+                
+                    ></EpisodeBox>)}
 
 
 
