@@ -14,7 +14,8 @@ import {
     Sidebar,
     Visibility,
     GridColumn,
-    Accordion
+    Accordion,
+    Item
 } from 'semantic-ui-react'
 
 class EpisodeBox extends React.Component {
@@ -45,7 +46,8 @@ handleAccordionClick = () => {
   render() {
     return (
       <Segment style={{ padding: "3em 0em" }} className="episode-box ">
-        <Container text>
+        
+        {/* <Container text> */}
           <Header as="h3" style={{ fontSize: "2em" }}>
            {this.title}
           </Header>
@@ -54,18 +56,14 @@ handleAccordionClick = () => {
           </p>
 
           <Accordion>
-            <Accordion.Title active={this.state.detailsOpened} index={0}>
+            <Accordion.Title active={this.state.detailsOpened}>
               <Button as="a" size="large" onClick={this.handleAccordionClick}>
                 <Icon name="dropdown" /> Słuchaj teraz
               </Button>
             </Accordion.Title>
-            <Accordion.Content active={this.state.detailsOpened}>
-                {/* <iframe src="https://anchor.fm/zyciowy-architekt/embed/episodes/8--Dieta-niskoinformacyjna-e50jrh"  width="100%"  frameborder="0"  scrolling="no>  */}
-                   <iframe src={this.snippet} width="100%" frameBorder="0" scrolling="no"></iframe>
-
-            </Accordion.Content>
           </Accordion>
-        </Container>
+        {/* </Container> */}
+        { this.state.detailsOpened && <iframe title="iFrameName" src={this.snippet} width="100%" frameBorder="0" scrolling="no"></iframe> }
       </Segment>
     );
   }

@@ -15,7 +15,8 @@ import {
     Sidebar,
     Visibility,
     GridColumn,
-    Accordion
+    Accordion,
+    Search
 } from 'semantic-ui-react'
 import EpisodeBox from './EpisodeBox';
 import FeedReader from './services/feedReader';
@@ -31,14 +32,14 @@ const getWidth = () => {
 
 let state = { activeIndex: 0 }
 
-  const handleClick = (e, titleProps) => {
+const handleClick = (e, titleProps) => {
     const { index } = titleProps
     const { activeIndex } = this.state
     const newIndex = activeIndex === index ? -1 : index
 
     this.setState({ activeIndex: newIndex })
-  }
-  const { activeIndex } = 0
+}
+const { activeIndex } = 0
 /* eslint-disable react/no-multi-comp */
 /* Heads up! HomepageHeading uses inline styling, however it's not the best practice. Use CSS or styled components for
  * such things.
@@ -101,34 +102,39 @@ class DesktopContainer extends Component {
                     <Segment
                         inverted
                         textAlign='center'
-                        style={{ minHeight: 700, padding: '1em 0em', 
+                        style={{
+                            minHeight: 700, padding: '0em 0em',
                             backgroundImage: `url(${"img/tree-headline.jpg"})`,
-                        backgroundSize: 'cover' }}
+                            backgroundSize: 'cover'
+                        }}
                         vertical
                     >
                         <Menu
-                            fixed={fixed ? 'top' : null}
-                            inverted={!fixed}
-                            pointing={!fixed}
-                            secondary={!fixed}
+                            // fixed={fixed ? 'top' : null}
+                            // inverted={!fixed}
+                            // pointing={!fixed}
+                            // secondary={!fixed}
                             size='large'
+                            style={{ borderWidth: 0, backgroundColor: '#FFFFFF55' }}
                         >
-                            <Container>
-                                <Menu.Item as='a' active>
-                                    Home
+                            {/* <Container> */}
+                            <Menu.Item as='a' active>
+                                Home
                 </Menu.Item>
-                                <Menu.Item as='a'>Lista odcinków</Menu.Item>
-                                <Menu.Item as='a'>Śledź podcast</Menu.Item>
-                                <Menu.Item as='a'>Kontakt</Menu.Item>
-                                <Menu.Item position='right'>
-                                    <Button as='a' inverted={!fixed}>
-                                        Log in
-                  </Button>
-                                    <Button as='a' inverted={!fixed} primary={fixed} style={{ marginLeft: '0.5em' }}>
-                                        Sign Up
-                  </Button>
-                                </Menu.Item>
-                            </Container>
+                            <Menu.Item as='a'>Lista odcinków</Menu.Item>
+                            <Menu.Item as='a'>Śledź podcast</Menu.Item>
+                            <Menu.Item as='a'>Kontakt</Menu.Item>
+                            <Menu.Item position='right'>
+
+
+                                <Search
+
+                                />
+                                <Button icon='world' />
+
+
+                            </Menu.Item>
+                            {/* </Container> */}
                         </Menu>
                         <HomepageHeading />
                     </Segment>
@@ -183,9 +189,11 @@ class MobileContainer extends Component {
                     <Segment
                         inverted
                         textAlign='center'
-                        style={{ minHeight: 350, padding: '1em 0em',
-                        backgroundImage: `url(${"img/tree-headline.jpg"})`,
-                        backgroundSize: 'cover' }}
+                        style={{
+                            minHeight: 350, padding: '1em 0em',
+                            backgroundImage: `url(${"img/tree-headline.jpg"})`,
+                            backgroundSize: 'cover'
+                        }}
                         vertical
                     >
                         <Container>
@@ -246,52 +254,54 @@ class HomepageLayout extends React.Component {
     }
 
 
-    
-render() {
-    
-    console.log(this.episodes);
-    return <ResponsiveContainer>
-        {this.state.episodes.map((episode, i) => 
-         <EpisodeBox title={episode.title}
-         description={episode.description}
-         snippet='https://anchor.fm/zyciowy-architekt/embed/episodes/8--Dieta-niskoinformacyjna-e50jrh'></EpisodeBox>)}
 
-        <Segment inverted vertical style={{ padding: '5em 0em' }}>
-            <Container>
-                <Grid divided inverted stackable>
-                    <Grid.Row>
-                        <Grid.Column width={3}>
-                            <Header inverted as='h4' content='About' />
-                            <List link inverted>
-                                <List.Item as='a'>Sitemap</List.Item>
-                                <List.Item as='a'>Contact Us</List.Item>
-                                <List.Item as='a'>Religious Ceremonies</List.Item>
-                                <List.Item as='a'>Gazebo Plans</List.Item>
-                            </List>
-                        </Grid.Column>
-                        <Grid.Column width={3}>
-                            <Header inverted as='h4' content='Services' />
-                            <List link inverted>
-                                <List.Item as='a'>Banana Pre-Order</List.Item>
-                                <List.Item as='a'>DNA FAQ</List.Item>
-                                <List.Item as='a'>How To Access</List.Item>
-                                <List.Item as='a'>Favorite X-Men</List.Item>
-                            </List>
-                        </Grid.Column>
-                        <Grid.Column width={7}>
-                            <Header as='h4' inverted>
-                                Footer Header
+    render() {
+
+        console.log(this.episodes);
+        return <ResponsiveContainer>
+            {this.state.episodes.map((episode, i) =>
+                <EpisodeBox title={episode.title}
+                    description={episode.description}
+                    snippet='https://anchor.fm/zyciowy-architekt/embed/episodes/8--Dieta-niskoinformacyjna-e50jrh'></EpisodeBox>)}
+
+
+
+            <Segment inverted vertical style={{ padding: '10em 0em' }}>
+                <Container>
+                    <Grid divided inverted stackable>
+                        <Grid.Row>
+                            <Grid.Column width={3}>
+                                <Header inverted as='h4' content='About' />
+                                <List link inverted>
+                                    <List.Item as='a'>Sitemap</List.Item>
+                                    <List.Item as='a'>Contact Us</List.Item>
+                                    <List.Item as='a'>Religious Ceremonies</List.Item>
+                                    <List.Item as='a'>Gazebo Plans</List.Item>
+                                </List>
+                            </Grid.Column>
+                            <Grid.Column width={3}>
+                                <Header inverted as='h4' content='Services' />
+                                <List link inverted>
+                                    <List.Item as='a'>Banana Pre-Order</List.Item>
+                                    <List.Item as='a'>DNA FAQ</List.Item>
+                                    <List.Item as='a'>How To Access</List.Item>
+                                    <List.Item as='a'>Favorite X-Men</List.Item>
+                                </List>
+                            </Grid.Column>
+                            <Grid.Column width={7}>
+                                <Header as='h4' inverted>
+                                    Footer Header
               </Header>
-                            <p>
-                                Extra space for a call to action inside the footer that could help re-engage users.
+                                <p>
+                                    Extra space for a call to action inside the footer that could help re-engage users.
               </p>
-                        </Grid.Column>
-                    </Grid.Row>
-                </Grid>
-            </Container>
-        </Segment>
-    </ResponsiveContainer>
-}
+                            </Grid.Column>
+                        </Grid.Row>
+                    </Grid>
+                </Container>
+            </Segment>
+        </ResponsiveContainer>
+    }
 }
 
 export default HomepageLayout
