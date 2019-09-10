@@ -31,9 +31,9 @@ class FeedReader {
                 reference: React.createRef(),
                 link: value.querySelector("link").textContent,
                 guid: value.querySelector("guid").textContent,
-                pubDate: value.querySelector("pubDate").textContent,
+                pubdate: value.querySelector("pubDate").textContent,
                 enclosure : value.querySelector("enclosure").textContent,
-                embedLink: value.querySelector("link").textContent.replace("/episodes", "/embed/episodes")
+                embedlink: value.querySelector("link").textContent.replace("/episodes", "/embed/episodes")
             });
         } );
 

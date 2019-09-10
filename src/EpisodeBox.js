@@ -1,21 +1,10 @@
 import React from "react";
 import {
   Button,
-  Container,
-  Divider,
-  Grid,
   Header,
   Icon,
-  Image,
-  List,
-  Menu,
-  Responsive,
   Segment,
-  Sidebar,
-  Visibility,
-  GridColumn,
-  Accordion,
-  Item
+  Accordion
 } from 'semantic-ui-react'
 
 class EpisodeBox extends React.Component {
@@ -26,12 +15,11 @@ class EpisodeBox extends React.Component {
 
   constructor(props) {
     super(props);
-    this.aaa = React.createRef();
     this.state = {
       detailsOpened: false,
       title: props.episode.title,
       description: props.episode.description,
-      embedLink: props.episode.embedLink,
+      embedlink: props.episode.embedlink,
       reference: props.episode.reference,
       guid: props.episode.guid
     };
@@ -46,9 +34,8 @@ class EpisodeBox extends React.Component {
 
   render() {
     const { detailsOpened, title, description, 
-      snippet, reference, guid,
-      embedLink } = this.state;
-    console.log(this.aaa);
+      reference, guid,
+      embedlink } = this.state;
     return (
 
 
@@ -70,7 +57,7 @@ class EpisodeBox extends React.Component {
           </Accordion.Title>
         </Accordion>
         {/* </Container> */}
-        {detailsOpened && <iframe title="iFrameName" src={embedLink} width="100%" frameBorder="0" scrolling="no"></iframe>}
+        {detailsOpened && <iframe title="iFrameName" src={embedlink} width="100%" frameBorder="0" scrolling="no"></iframe>}
       </Segment>
     );
   }

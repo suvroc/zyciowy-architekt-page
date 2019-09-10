@@ -3,23 +3,20 @@ import React, { Component } from 'react'
 import {
     Button,
     Container,
-    Divider,
     Grid,
     Header,
     Icon,
-    Image,
     List,
     Menu,
     Responsive,
     Segment,
     Sidebar,
     Visibility,
-    GridColumn,
-    Accordion,
     Search
 } from 'semantic-ui-react'
 import EpisodeBox from './EpisodeBox';
 import FeedReader from './services/feedReader';
+import Mailchimp from './mailChimp';
 
 // Heads up!
 // We using React Static to prerender our docs with server side rendering, this is a quite simple solution.
@@ -30,16 +27,47 @@ const getWidth = () => {
     return isSSR ? Responsive.onlyTablet.minWidth : window.innerWidth
 }
 
-let state = { activeIndex: 0 }
 
-const handleClick = (e, titleProps) => {
-    const { index } = titleProps
-    const { activeIndex } = this.state
-    const newIndex = activeIndex === index ? -1 : index
+class SubscribePage extends React.Component {
+      render() {
+          return (
+            <Mailchimp
+            action='https://diwebsity.us13.list-manage.com/subscribe/post?u=0c124adc446c623daa922e46a&amp;id=262b01e404' 
+            
+            //Adding multiple fields:
+            fields={[
+              {
+                name: 'EMAIL',
+                placeholder: 'Email',
+                type: 'email',
+                required: true
+              },
+              {
+                name: 'FNAME',
+                placeholder: 'Imię',
+                type: 'text',
+                required: true
+              }
+            ]}
+            // Change predetermined language
+            messages = {
+              {
+                sending: "Sending...",
+                success: "Thank you for subscribing!",
+                error: "An unexpected internal error has occurred.",
+                empty: "You must write an e-mail.",
+                duplicate: "Too many subscribe attempts for this email address",
+                button: "Subskrybuj!"
+              }
+            }
+            // Add a personalized class
+            className=''
+            />
+          )
+      }
+  }
 
-    this.setState({ activeIndex: newIndex })
-}
-const { activeIndex } = 0
+
 /* eslint-disable react/no-multi-comp */
 /* Heads up! HomepageHeading uses inline styling, however it's not the best practice. Use CSS or styled components for
  * such things.
@@ -67,10 +95,8 @@ const HomepageHeading = ({ mobile }) => (
                 marginTop: mobile ? '0.5em' : '1.5em',
             }}
         />
-        <Button primary size='huge'>
-            Subskrybuj
-      <Icon name='right arrow' />
-        </Button>
+        <p>Jeżeli chcesz otrzymywać powiadomienia mailowe o nowych odcinkach to zostaw swój email</p>
+        <SubscribePage></SubscribePage>
     </Container>
 )
 
@@ -96,7 +122,6 @@ class DesktopContainer extends Component {
             this.setState({
                 episodes: result
             });
-            console.log('1');
         });
     }
 
@@ -165,15 +190,14 @@ class DesktopContainer extends Component {
                             size='large'
                             style={{ borderWidth: 0, backgroundColor: '#FFFFFF88' }}
                         >
-                            {/* <Container> */}
-                            <Menu.Item as='a' active>
+                            
+                            {/* <Menu.Item as='a' active>
                                 Home
                 </Menu.Item>
                             <Menu.Item as='a'>Lista odcinków</Menu.Item>
                             <Menu.Item as='a'>Śledź podcast</Menu.Item>
-                            <Menu.Item as='a'>Kontakt</Menu.Item>
+                            <Menu.Item as='a'>Kontakt</Menu.Item> */}
                             <Menu.Item position='right'>
-
 
                                 <Search
                                     loading={isLoading}
@@ -182,12 +206,11 @@ class DesktopContainer extends Component {
                                     results={results}
                                     value={value}
                                     resultRenderer={this.resultRenderer}
-                                    {...this.props}
                                 />
-                                <Button icon='world' />
+                                {/* <Button icon='world' /> */}
 
                             </Menu.Item>
-                            {/* </Container> */}
+                            
                         </Menu>
                         <HomepageHeading />
                     </Segment>
@@ -312,7 +335,7 @@ class HomepageLayout extends React.Component {
     render() {
         return <ResponsiveContainer>
             {this.state.episodes.map((episode, i) =>
-                <EpisodeBox episode={episode}
+                <EpisodeBox key={episode.guid} episode={episode}
                 
                     ></EpisodeBox>)}
 
