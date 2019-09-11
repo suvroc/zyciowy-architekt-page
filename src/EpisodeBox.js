@@ -4,7 +4,8 @@ import {
   Header,
   Icon,
   Segment,
-  Accordion
+  Accordion,
+  Item
 } from 'semantic-ui-react'
 
 class EpisodeBox extends React.Component {
@@ -37,18 +38,23 @@ class EpisodeBox extends React.Component {
       reference, guid,
       embedlink } = this.state;
     return (
+<div>
 
+      <Segment id={guid} style={{ marginTop: "15px", marginBottom: "15px" }} className="episode-box ">
 
-      <Segment id={guid} style={{ padding: "3em 0em" }} className="episode-box ">
-        <div ref={reference}></div>
-        {/* <Container text> */}
-        <Header as="h3" style={{ fontSize: "2em" }}>
+      <Item.Group>
+    <Item align="left">
+      <Item.Image size='small' src='https://s3-us-west-2.amazonaws.com/anchor-generated-image-bank/production/podcast_uploaded400/1536383/1536383-1552496098686-1a2dd899c5da9.jpg' />
+
+      <Item.Content>
+        <Item.Header>
+        <Header as="h2">
           {title}
-        </Header>
+        </Header></Item.Header>
+        <Item.Description>
         <p style={{ fontSize: "1.33em" }}
           dangerouslySetInnerHTML={{ __html: description }}>
         </p>
-
         <Accordion>
           <Accordion.Title active={detailsOpened}>
             <Button as="a" size="large" onClick={this.handleAccordionClick}>
@@ -56,9 +62,18 @@ class EpisodeBox extends React.Component {
               </Button>
           </Accordion.Title>
         </Accordion>
-        {/* </Container> */}
+        </Item.Description>
+      </Item.Content>
+    </Item>
+    </Item.Group>
+
+        
+       
+
+        
         {detailsOpened && <iframe title="iFrameName" src={embedlink} width="100%" frameBorder="0" scrolling="no"></iframe>}
       </Segment>
+      </div>
     );
   }
 }
