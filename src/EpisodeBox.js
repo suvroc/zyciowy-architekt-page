@@ -22,7 +22,8 @@ class EpisodeBox extends React.Component {
       description: props.episode.description,
       embedlink: props.episode.embedlink,
       reference: props.episode.reference,
-      guid: props.episode.guid
+      guid: props.episode.guid,
+      image: props.episode.image
     };
     
   }
@@ -36,7 +37,7 @@ class EpisodeBox extends React.Component {
   render() {
     const { detailsOpened, title, description, 
       reference, guid,
-      embedlink } = this.state;
+      embedlink, image } = this.state;
     return (
 <div>
 
@@ -44,7 +45,7 @@ class EpisodeBox extends React.Component {
 
       <Item.Group>
     <Item align="left">
-      <Item.Image size='small' src='https://s3-us-west-2.amazonaws.com/anchor-generated-image-bank/production/podcast_uploaded400/1536383/1536383-1552496098686-1a2dd899c5da9.jpg' />
+      <Item.Image size='small' src={image} />
 
       <Item.Content>
         <Item.Header>

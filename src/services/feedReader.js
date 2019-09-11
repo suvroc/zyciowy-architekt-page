@@ -33,7 +33,8 @@ class FeedReader {
                 guid: value.querySelector("guid").textContent,
                 pubdate: value.querySelector("pubDate").textContent,
                 enclosure : value.querySelector("enclosure").textContent,
-                embedlink: value.querySelector("link").textContent.replace("/episodes", "/embed/episodes")
+                embedlink: value.querySelector("link").textContent.replace("/episodes", "/embed/episodes"),
+                image: value.querySelector('*|image').getAttribute("href")
             });
         } );
 
