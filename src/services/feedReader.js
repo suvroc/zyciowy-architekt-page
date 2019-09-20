@@ -5,7 +5,7 @@ class FeedReader {
     
     readFeed() {
         let cachedItem = localStorage.getItem("podcast-feed")
-        if (cachedItem != null) {
+        if (cachedItem != null && (new Date() - cachedItem.updateTime)/ (1000 * 60 * 60) < 24 ) {
             
             return Promise.resolve(this.buildModel(JSON.parse(cachedItem).data));
         }

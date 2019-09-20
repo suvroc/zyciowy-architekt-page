@@ -36,8 +36,8 @@ class EpisodeBox extends React.Component {
 
   render() {
     const { detailsOpened, title, description, 
-      reference, guid,
-      embedlink, image } = this.state;
+      guid,
+      embedlink } = this.state;
     return (
 <div>
 
@@ -45,7 +45,7 @@ class EpisodeBox extends React.Component {
 
       <Item.Group>
     <Item align="left">
-      <Item.Image size='small' src={image} />
+      {/* <Item.Image size='small' src={image} /> */}
 
       <Item.Content>
         <Item.Header>

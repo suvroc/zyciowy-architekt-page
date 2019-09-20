@@ -101,6 +101,10 @@ HomepageHeading.propTypes = {
     mobile: PropTypes.bool
 };
 
+class SearchEpisode extends Component {
+    
+}
+
 /* Heads up!
  * Neither Semantic UI nor Semantic UI React offer a responsive navbar, however, it can be implemented easily.
  * It can be more complicated, but you can create really flexible markup.
@@ -194,7 +198,7 @@ class DesktopContainer extends Component {
                                 <a
                                     class="podcast-link"
                                     href="https://itunes.apple.com/us/podcast/%C5%BCyciowy-architekt/id1456397363?mt=2&amp;uo=4"
-                                    target="_blank"
+                                    target="_blank" rel="noopener noreferrer"
                                 >
                                     <img
                                         src="img/apple_podcasts.png"
@@ -207,7 +211,7 @@ class DesktopContainer extends Component {
                                 <a
                                 class="podcast-link"
                                     href="https://www.breaker.audio/zyciowy-architekt"
-                                    target="_blank"
+                                    target="_blank" rel="noopener noreferrer"
                                 >
                                     <img
                                         src="img/breaker.png"
@@ -217,22 +221,22 @@ class DesktopContainer extends Component {
                                     />
                                 </a>
 
-                                <a class="podcast-link" href="https://www.google.com/podcasts?feed=aHR0cHM6Ly9hbmNob3IuZm0vcy85YzBlYzFjL3BvZGNhc3QvcnNz" target="_blank">
+                                <a class="podcast-link" href="https://www.google.com/podcasts?feed=aHR0cHM6Ly9hbmNob3IuZm0vcy85YzBlYzFjL3BvZGNhc3QvcnNz" target="_blank" rel="noopener noreferrer">
                                     <img src="img/google_podcasts.png" alt="Google Podcasts Logo" width="28" height="28" />
                                 </a>
 
-                                <a class="podcast-link" href="https://overcast.fm/itunes1456397363/yciowy-architekt" target="_blank">
+                                <a class="podcast-link" href="https://overcast.fm/itunes1456397363/yciowy-architekt" target="_blank" rel="noopener noreferrer">
                                     <img src="img/overcast.png" alt="Overcast Logo" width="28" height="28" />
                                 </a>
 
-                                <a class="podcast-link" href="https://pca.st/Pr93" target="_blank">
+                                <a class="podcast-link" href="https://pca.st/Pr93" target="_blank" rel="noopener noreferrer">
                                     <img src="img/pocket_casts.png" alt="Pocket Casts Logo" width="28" height="28" />
                                 </a>
-                                <a class="podcast-link" href="https://radiopublic.com/yciowy-architekt-WaVvQx" target="_blank">
+                                <a class="podcast-link" href="https://radiopublic.com/yciowy-architekt-WaVvQx" target="_blank" rel="noopener noreferrer">
                                     <img src="img/radiopublic.png" alt="RadioPublic Logo" width="28" height="28" />
                                 </a>
 
-                                <a class="podcast-link" href="https://open.spotify.com/show/7z5x0O4TZzksMhc2YJBqn6" target="_blank">
+                                <a class="podcast-link" href="https://open.spotify.com/show/7z5x0O4TZzksMhc2YJBqn6" target="_blank" rel="noopener noreferrer">
                                     <img src="img/spotify.png" alt="Spotify Logo" width="28" height="28" />
                                 </a>
 
@@ -409,63 +413,58 @@ class HomepageLayout extends React.Component {
 
                                     <div>
                                         <a
-                                            href="https://www.addtoany.com/share#url=http%3A%2F%2Fzyciowyarchitekt.pl%2F&amp;title="
-                                            target="_blank"
-                                        >
-                                            <img
-                                                src="https://static.addtoany.com/buttons/a2a.svg"
-                                                width="32"
-                                                height="32"
-                                            />
-                                        </a>
-                                        <a
                                             href="https://www.addtoany.com/add_to/facebook?linkurl=http%3A%2F%2Fzyciowyarchitekt.pl%2F&amp;linkname="
-                                            target="_blank"
+                                            target="_blank" rel="noopener noreferrer"
                                         >
                                             <img
                                                 src="https://static.addtoany.com/buttons/facebook.svg"
                                                 width="32"
                                                 height="32"
+                                                alt="facebook share"
                                             />
                                         </a>
                                         <a
                                             href="https://www.addtoany.com/add_to/twitter?linkurl=http%3A%2F%2Fzyciowyarchitekt.pl%2F&amp;linkname="
-                                            target="_blank"
+                                            target="_blank" rel="noopener noreferrer"
                                         >
                                             <img
                                                 src="https://static.addtoany.com/buttons/twitter.svg"
                                                 width="32"
                                                 height="32"
+                                                alt="twitter share"
                                             />
                                         </a>
                                         <a
                                             href="https://www.addtoany.com/add_to/email?linkurl=http%3A%2F%2Fzyciowyarchitekt.pl%2F&amp;linkname="
-                                            target="_blank"
+                                            target="_blank" rel="noopener noreferrer"
                                         >
                                             <img
                                                 src="https://static.addtoany.com/buttons/email.svg"
                                                 width="32"
                                                 height="32"
+                                                alt="email share"
                                             />
                                         </a>
                                         <a
                                             href="https://www.addtoany.com/add_to/linkedin?linkurl=http%3A%2F%2Fzyciowyarchitekt.pl%2F&amp;linkname="
-                                            target="_blank"
+                                            target="_blank" rel="noopener noreferrer"
                                         >
                                             <img
                                                 src="https://static.addtoany.com/buttons/linkedin.svg"
                                                 width="32"
                                                 height="32"
+                                                alt="linkedin share"
                                             />
                                         </a>
                                         <a
                                             href="https://www.addtoany.com/add_to/wykop?linkurl=http%3A%2F%2Fzyciowyarchitekt.pl%2F&amp;linkname="
-                                            target="_blank"
+                                            target="_blank" rel="noopener noreferrer"
                                         >
                                             <img
                                                 src="https://static.addtoany.com/buttons/wykop.svg"
                                                 width="32"
                                                 height="32"
+                                                alt="wykop share"
                                             />
                                         </a>
                                     </div>
