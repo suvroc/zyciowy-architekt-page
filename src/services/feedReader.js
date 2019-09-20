@@ -2,11 +2,11 @@ import axios from 'axios';
 import React from "react";
 
 class FeedReader {
-    
+
     readFeed() {
         let cachedItem = localStorage.getItem("podcast-feed")
-        if (cachedItem != null && (new Date() - cachedItem.updateTime)/ (1000 * 60 * 60) < 24 ) {
-            
+        if (cachedItem != null && (new Date() - cachedItem.updateTime) / (1000 * 60 * 60) < 24) {
+
             return Promise.resolve(this.buildModel(JSON.parse(cachedItem).data));
         }
         let feedUrl = 'https://anchor.fm/s/9c0ec1c/podcast/rss';
@@ -32,11 +32,11 @@ class FeedReader {
                 link: value.querySelector("link").textContent,
                 guid: value.querySelector("guid").textContent,
                 pubdate: value.querySelector("pubDate").textContent,
-                enclosure : value.querySelector("enclosure").textContent,
+                enclosure: value.querySelector("enclosure").textContent,
                 embedlink: value.querySelector("link").textContent.replace("/episodes", "/embed/episodes"),
                 image: value.querySelector('*|image').getAttribute("href")
             });
-        } );
+        });
 
         return result;
     }

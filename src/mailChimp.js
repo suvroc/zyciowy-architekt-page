@@ -112,13 +112,4 @@ Mailchimp.defaultProps = {
     }
 };
 
-// Mailchimp.propTypes = {
-//   action: PropTypes.string,
-//   messages: PropTypes.object,
-//   fields: PropTypes.array,
-//   styles: PropTypes.object,
-//   className: PropTypes.string,
-//   buttonClassName: PropTypes.string
-// };
-
 export default Mailchimp;

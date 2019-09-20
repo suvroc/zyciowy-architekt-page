@@ -1,11 +1,9 @@
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import {
-    Button,
     Container,
     Grid,
     Header,
-    Icon,
     Menu,
     Responsive,
     Segment,
@@ -48,11 +46,11 @@ class SubscribePage extends React.Component {
                 ]}
                 // Change predetermined language
                 messages={{
-                    sending: "Sending...",
-                    success: "Thank you for subscribing!",
-                    error: "An unexpected internal error has occurred.",
-                    empty: "You must write an e-mail.",
-                    duplicate: "Too many subscribe attempts for this email address",
+                    sending: "Wysyłanie...",
+                    success: "Dziękuję za zapisanie się!",
+                    error: "Nieoczekiwany błąd techniczny. Spróbuj ponownie",
+                    empty: "Musisz wpisać adres email.",
+                    duplicate: "Już jestes zapisany",
                     button: "Subskrybuj!"
                 }}
                 // Add a personalized class
@@ -102,32 +100,18 @@ HomepageHeading.propTypes = {
 };
 
 class SearchEpisode extends Component {
-    
-}
-
-/* Heads up!
- * Neither Semantic UI nor Semantic UI React offer a responsive navbar, however, it can be implemented easily.
- * It can be more complicated, but you can create really flexible markup.
- */
-class DesktopContainer extends Component {
     initialState = { isLoading: false, results: [], value: "" };
 
     state = this.initialState;
 
     constructor() {
         super();
-        // this.state = {
-        //     episodes: []
-        // };
         new FeedReader().readFeed().then(result => {
             this.setState({
                 episodes: result
             });
         });
     }
-
-    hideFixedMenu = () => this.setState({ fixed: false });
-    showFixedMenu = () => this.setState({ fixed: true });
 
     handleResultSelect = (e, { result }) => {
         this.setState({ value: result.title });
@@ -157,8 +141,35 @@ class DesktopContainer extends Component {
     resultRenderer = ({ title }) => <div className="title">{title}</div>;
 
     render() {
-        const { children } = this.props;
         const { isLoading, value, results } = this.state;
+        return (<Search
+            loading={isLoading}
+            onResultSelect={this.handleResultSelect}
+            onSearchChange={this.handleSearchChange}
+            results={results}
+            value={value}
+            resultRenderer={this.resultRenderer}
+        />);
+    }
+}
+
+/* Heads up!
+ * Neither Semantic UI nor Semantic UI React offer a responsive navbar, however, it can be implemented easily.
+ * It can be more complicated, but you can create really flexible markup.
+ */
+class DesktopContainer extends Component {
+
+
+    hideFixedMenu = () => this.setState({ fixed: false });
+    showFixedMenu = () => this.setState({ fixed: true });
+
+
+
+
+
+    render() {
+        const { children } = this.props;
+
 
         return (
             <Responsive getWidth={getWidth} minWidth={Responsive.onlyTablet.minWidth}>
@@ -173,30 +184,19 @@ class DesktopContainer extends Component {
                         style={{
                             minHeight: 700,
                             padding: "0em 0em",
-                            //backgroundImage: `url(${"img/tree-headline.jpg"})`,
-                            background: `linear-gradient(rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0.3)),url("img/tree-headline.jpg")`,
+                            background: `url("img/tree-headline.jpg")`,
 
                             backgroundSize: "cover"
                         }}
                         vertical
                     >
                         <Menu
-                            // fixed={fixed ? 'top' : null}
-                            // inverted={!fixed}
-                            // pointing={!fixed}
-                            // secondary={!fixed}
                             size="large"
                             style={{ borderWidth: 0, backgroundColor: "#FFFFFF88" }}
                         >
-                            {/* <Menu.Item as='a' active>
-                                Home
-                </Menu.Item>
-                            <Menu.Item as='a'>Lista odcinków</Menu.Item>
-                            <Menu.Item as='a'>Śledź podcast</Menu.Item>
-                            <Menu.Item as='a'>Kontakt</Menu.Item> */}
                             <Menu.Item >
                                 <a
-                                    class="podcast-link"
+                                    className="podcast-link"
                                     href="https://itunes.apple.com/us/podcast/%C5%BCyciowy-architekt/id1456397363?mt=2&amp;uo=4"
                                     target="_blank" rel="noopener noreferrer"
                                 >
@@ -209,7 +209,7 @@ class DesktopContainer extends Component {
 
                                 </a>
                                 <a
-                                class="podcast-link"
+                                    className="podcast-link"
                                     href="https://www.breaker.audio/zyciowy-architekt"
                                     target="_blank" rel="noopener noreferrer"
                                 >
@@ -221,37 +221,29 @@ class DesktopContainer extends Component {
                                     />
                                 </a>
 
-                                <a class="podcast-link" href="https://www.google.com/podcasts?feed=aHR0cHM6Ly9hbmNob3IuZm0vcy85YzBlYzFjL3BvZGNhc3QvcnNz" target="_blank" rel="noopener noreferrer">
+                                <a className="podcast-link" href="https://www.google.com/podcasts?feed=aHR0cHM6Ly9hbmNob3IuZm0vcy85YzBlYzFjL3BvZGNhc3QvcnNz" target="_blank" rel="noopener noreferrer">
                                     <img src="img/google_podcasts.png" alt="Google Podcasts Logo" width="28" height="28" />
                                 </a>
 
-                                <a class="podcast-link" href="https://overcast.fm/itunes1456397363/yciowy-architekt" target="_blank" rel="noopener noreferrer">
+                                <a className="podcast-link" href="https://overcast.fm/itunes1456397363/yciowy-architekt" target="_blank" rel="noopener noreferrer">
                                     <img src="img/overcast.png" alt="Overcast Logo" width="28" height="28" />
                                 </a>
 
-                                <a class="podcast-link" href="https://pca.st/Pr93" target="_blank" rel="noopener noreferrer">
+                                <a className="podcast-link" href="https://pca.st/Pr93" target="_blank" rel="noopener noreferrer">
                                     <img src="img/pocket_casts.png" alt="Pocket Casts Logo" width="28" height="28" />
                                 </a>
-                                <a class="podcast-link" href="https://radiopublic.com/yciowy-architekt-WaVvQx" target="_blank" rel="noopener noreferrer">
+                                <a className="podcast-link" href="https://radiopublic.com/yciowy-architekt-WaVvQx" target="_blank" rel="noopener noreferrer">
                                     <img src="img/radiopublic.png" alt="RadioPublic Logo" width="28" height="28" />
                                 </a>
 
-                                <a class="podcast-link" href="https://open.spotify.com/show/7z5x0O4TZzksMhc2YJBqn6" target="_blank" rel="noopener noreferrer">
+                                <a className="podcast-link" href="https://open.spotify.com/show/7z5x0O4TZzksMhc2YJBqn6" target="_blank" rel="noopener noreferrer">
                                     <img src="img/spotify.png" alt="Spotify Logo" width="28" height="28" />
                                 </a>
 
 
                             </Menu.Item>
                             <Menu.Item position="right">
-                                <Search
-                                    loading={isLoading}
-                                    onResultSelect={this.handleResultSelect}
-                                    onSearchChange={this.handleSearchChange}
-                                    results={results}
-                                    value={value}
-                                    resultRenderer={this.resultRenderer}
-                                />
-                                {/* <Button icon='world' /> */}
+                                <SearchEpisode />
                             </Menu.Item>
                         </Menu>
                         <HomepageHeading />
@@ -310,26 +302,15 @@ class MobileContainer extends Component {
                         style={{
                             minHeight: 350,
                             padding: "1em 0em",
-                            //backgroundImage: `url(${"img/tree-headline.jpg"})`,
-                            background:
-                                'url("img/tree-headline.jpg");background-size: cover',
+                            background: `url("img/tree-headline.jpg")`,
                             backgroundSize: "cover"
-                            // linear-gradient(           rgba(0, 0, 0, 0.3),            rgba(0, 0, 0, 0.3)         ),
                         }}
                         vertical
                     >
                         <Container>
-                            <Menu inverted pointing secondary size="large">
-                                <Menu.Item onClick={this.handleToggle}>
-                                    <Icon name="sidebar" />
-                                </Menu.Item>
+                            <Menu secondary size="large">
                                 <Menu.Item position="right">
-                                    <Button as="a" inverted>
-                                        Log in
-                  </Button>
-                                    <Button as="a" inverted style={{ marginLeft: "0.5em" }}>
-                                        Sign Up
-                  </Button>
+                                    <SearchEpisode />
                                 </Menu.Item>
                             </Menu>
                         </Container>
@@ -383,29 +364,8 @@ class HomepageLayout extends React.Component {
                     <Container>
                         <Grid divided inverted stackable>
                             <Grid.Row>
-                                {/* <Grid.Column width={3}>
-                                <Header inverted as='h4' content='About' />
-                                <List link inverted>
-                                    <List.Item as='a'>Sitemap</List.Item>
-                                    <List.Item as='a'>Contact Us</List.Item>
-                                    <List.Item as='a'>Religious Ceremonies</List.Item>
-                                    <List.Item as='a'>Gazebo Plans</List.Item>
-                                </List>
-                            </Grid.Column>
-                            <Grid.Column width={3}>
-                                <Header inverted as='h4' content='Services' />
-                                <List link inverted>
-                                    <List.Item as='a'>Banana Pre-Order</List.Item>
-                                    <List.Item as='a'>DNA FAQ</List.Item>
-                                    <List.Item as='a'>How To Access</List.Item>
-                                    <List.Item as='a'>Favorite X-Men</List.Item>
-                                </List>
-                            </Grid.Column> */}
                                 <Grid.Column width={16}>
-                                    {/* <Header as="h4" inverted>
-                                        Kontakt
-                  </Header> */}
-                                    <p>aaa@o2.pl</p>
+                                    <p>zyciowyarchitekt@gmail.com</p>
                                     <p>
                                         Copyright &copy;{" "}
                                         <a href="https://www.diwebsity.com/">Diwebsity</a>
