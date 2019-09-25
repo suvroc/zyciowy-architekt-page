@@ -15,6 +15,7 @@ code {
 .ui.segment.episode-box {
   margin-left: 42px;
   margin-right: 42px;
+  padding: 2em 2em;
 }
 
 .ui.segment.item {
