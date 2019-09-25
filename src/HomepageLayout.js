@@ -14,6 +14,7 @@ import {
 import EpisodeBox from "./EpisodeBox";
 import Mailchimp from "./mailChimp";
 import FeedReader from "./services/feedReader";
+import { Parallax } from 'react-parallax';
 
 // Heads up!
 // We using React Static to prerender our docs with server side rendering, this is a quite simple solution.
@@ -178,19 +179,29 @@ class DesktopContainer extends Component {
                     onBottomPassed={this.showFixedMenu}
                     onBottomPassedReverse={this.hideFixedMenu}
                 >
-                    <Segment
+                     <Parallax
+            bgImage={'../img/tree-headline.jpg'}
+            bgImageAlt="the cat"
+            bgImageStyle={{
+                height: 'auto'
+                // padding: '50vh 30vw',
+                // background: 'url(../img/tree-headline.jpg)',
+                // backgroundSize: 'cover'
+            }}
+            strength={1000}
+            blur={{ min: -15, max: 15 }}
+        >
+             <Segment
                         inverted
                         textAlign="center"
                         style={{
                             minHeight: 700,
                             padding: "0em 0em",
-                            background: `url("img/tree-headline.jpg")`,
-
-                            backgroundSize: "cover"
+                            backgroundColor: 'transparent'
                         }}
                         vertical
                     >
-                        <Menu
+                        <Menu 
                             size="large"
                             style={{ borderWidth: 0, backgroundColor: "#FFFFFF88" }}
                         >
@@ -248,6 +259,8 @@ class DesktopContainer extends Component {
                         </Menu>
                         <HomepageHeading />
                     </Segment>
+        </Parallax>
+                   
                 </Visibility>
 
                 {children}
@@ -296,14 +309,27 @@ class MobileContainer extends Component {
                 </Sidebar>
 
                 <Sidebar.Pusher dimmed={sidebarOpened}>
+                <Parallax
+            bgImage={'../img/tree-headline.jpg'}
+            bgImageAlt="the cat"
+            bgImageStyle={{
+                // padding: '50vh 30vw',
+                // background: 'url(../img/tree-headline.jpg)',
+                // backgroundSize: 'cover'
+                height:'auto'
+            }}
+            strength={1000}
+            blur={{ min: -15, max: 15 }}
+        >
                     <Segment
                         inverted
                         textAlign="center"
                         style={{
-                            minHeight: 350,
+                            minHeight: '350',
                             padding: "1em 0em",
-                            background: `url("img/tree-headline.jpg")`,
-                            backgroundSize: "cover"
+                            backgroundColor: 'transparent'
+                            //background: `url("img/tree-headline.jpg")`,
+                            //backgroundSize: "cover"
                         }}
                         vertical
                     >
@@ -316,6 +342,7 @@ class MobileContainer extends Component {
                         </Container>
                         <HomepageHeading mobile />
                     </Segment>
+                    </Parallax>
 
                     {children}
                 </Sidebar.Pusher>
